@@ -1,0 +1,31 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: contacts
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: ContactsAPI_development
+  password: 123456
+
+  # Schema search path. The server defaults to $user,public
+  #schema_search_path: myapp,sharedapp,public
+
+  # Minimum log levels, in increasing order:
+  #   debug5, debug4, debug3, debug2, debug1,
+  #   log, notice, warning, error, fatal, and panic
+  # Defaults to warning.
+  #min_messages: notice
+test:
+  <<: *default
+  database: ContactsAPI_test
+  password: 123456
+
+production:
+  <<: *default
+  database: ContactsAPI_production
+  username: ContactsAPI
+  password: <%= ENV['CONTACTSAPI_DATABASE_PASSWORD'] %>
